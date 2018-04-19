@@ -23,13 +23,13 @@ public class DTarget extends Target {
 		"out", "override",
 		"package", "pragma", "private", "protected", "public", "pure",
 		"real", "ref", "return",
-		"scope", "shared", "short", "static", "struct", "super", "switch", "syncronized",
+		"scope", "shared", "short", "static", "struct", "super", "switch", "synchronized",
 		"template", "this", "throw", "true", "try", "typedef", "typeid", "typeof",
 		"ubyte", "ucent", "uint", "ulong", "union", "unittest", "ushort",
 		"version", "void",
 		"wchar", "while", "with",
 		"__FILE__", "__FILE_FULL_PATH__", "__MODULE__", "__LINE__", "__FUNCTION__", "__PRETTY_FUNCTION__",
-		"__gshared", "-_traits", "__vector", "__parameters"
+		"__gshared", "__traits", "__vector", "__parameters"
 	};
 
 	private final Set<String> badWords = new HashSet<>();
