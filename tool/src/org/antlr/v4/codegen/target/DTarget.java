@@ -4,6 +4,10 @@ import org.antlr.v4.codegen.CodeGenerator;
 import org.antlr.v4.codegen.Target;
 import org.antlr.v4.tool.ast.GrammarAST;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class DTarget extends Target {
 	protected static final String[] dKeywords = {"abstract", "alias", "align", "asm", "assert", "auto",
 		"body", "bool", "break", "byte",
@@ -28,10 +32,11 @@ public class DTarget extends Target {
 		"__gshared", "-_traits", "__vector", "__parameters"
 	};
 
+	private final Set<String> badWords = new HashSet<>();
+
 	protected DTarget(CodeGenerator gen) {
 		super(gen, "D");
 	}
-
 
 	@Override
 	public String getVersion() {
@@ -45,6 +50,32 @@ public class DTarget extends Target {
 
 	@Override
 	protected boolean visibleGrammarSymbolCausesIssueInGeneratedCode(GrammarAST idNode) {
-		return false;
+		return getBadWords().contains(idNode.getText());
+	}
+
+	@Override
+	public boolean supportsOverloadedMethods() {
+		return true;
+	}
+
+	@Override
+	public int getSerializedATNSegmentLimit() {
+		// 65535 is the class file format byte limit for a UTF-8 encoded string literal
+		// 3 is the maximum number of bytes it takes to encode a value in the range 0-0xFFFF
+		return 65535 / 3;
+	}
+
+	private Set<String> getBadWords() {
+		if (badWords.isEmpty()) {
+			addBadWords();
+		}
+
+		return badWords;
+	}
+
+	private void addBadWords() {
+		badWords.addAll(Arrays.asList(dKeywords));
+		badWords.add("rule");
+		badWords.add("parserRule");
 	}
 }
