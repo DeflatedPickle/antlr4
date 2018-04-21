@@ -1,0 +1,36 @@
+dTypeInitMap ::= [
+	"bool": "false",
+
+	"byte": "0",
+	"ubyte": "0",
+
+	"cent": "0",
+	"ucent": "0",
+
+	"char": "0",
+	"dchar": "0",
+	"wchar": "0",
+
+	"double": "0.0",
+	"cdouble": "0.0",
+	"idouble": "0.0",
+
+	"float": "0.0f",
+	"cfloat": "0.0f",
+	"ifloat": "0.0f",
+
+	"int": "0",
+	"uint": "0",
+
+	"long": "0",
+	"ulong": "0",
+
+	"real": "0",
+	"creal": "0",
+	"ireal": "0",
+
+	"short": "0",
+	"ushort": "0",
+
+	default: "null"
+]
