@@ -8,8 +8,8 @@ import antlr4.CharStream;
 import antlr4.misc.Interval;
 
 class ANTLRInputStream : CharStream {
-    public static final int READ_BUFFER_SIZE = 1024;
-   	public static final int INITIAL_BUFFER_SIZE = 1024;
+    public static const int READ_BUFFER_SIZE = 1024;
+   	public static const int INITIAL_BUFFER_SIZE = 1024;
 
 	protected char[] data;
 
@@ -88,7 +88,7 @@ class ANTLRInputStream : CharStream {
 		p = 0;
 	}
 
-    override public void consume() {
+    public void consume() {
 		if (p >= n) {
 			assert(LA(1) == IntStream.EOF);
 			throw new Exception("cannot consume EOF");
@@ -99,7 +99,7 @@ class ANTLRInputStream : CharStream {
         }
     }
 
-    override public int LA(int i) {
+    public int LA(int i) {
 		if (i == 0) {
 			return 0;
 		}
@@ -120,22 +120,22 @@ class ANTLRInputStream : CharStream {
 		return LA(i);
 	}
 
-    override public int index() {
+    public int index() {
         return p;
     }
 
-	override public int size() {
+	public int size() {
 		return n;
 	}
 
-	override public int mark() {
+	public int mark() {
 		return -1;
     }
 
-	override public void release(int marker) {
+	public void release(int marker) {
 	}
 
-	override public void seek(int index) {
+	public void seek(int index) {
 		if (index <= p) {
 			p = index;
 			return;
@@ -146,7 +146,7 @@ class ANTLRInputStream : CharStream {
 		}
 	}
 
-	override public string getText(Interval interval) {
+	public string getText(Interval interval) {
 		int start = interval.a;
 		int stop = interval.b;
 		if (stop >= n) {
@@ -159,7 +159,7 @@ class ANTLRInputStream : CharStream {
 		return new string(data, start, count);
 	}
 
-	override public string getSourceName() {
+	public string getSourceName() {
 		if (name is null || name.empty) {
 			return UNKNOWN_SOURCE_NAME;
 		}
@@ -167,7 +167,7 @@ class ANTLRInputStream : CharStream {
 		return name;
 	}
 
-    override public string tostring() {
+    override public string toString() {
         return new string(data);
     }
 }

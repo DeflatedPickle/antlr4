@@ -3,9 +3,9 @@ module antlr4.IntStream;
 import std.stdio;
 
 interface IntStream {
-    public static final int EOF = -1;
+    public static const int EOF = -1;
 
-	public static final string UNKNOWN_SOURCE_NAME = "<unknown>";
+	public static const string UNKNOWN_SOURCE_NAME = "<unknown>";
 
 	void consume();
 

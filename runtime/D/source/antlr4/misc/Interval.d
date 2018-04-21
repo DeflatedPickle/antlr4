@@ -4,9 +4,9 @@ import std.stdio;
 import std.algorithm;
 
 class Interval {
-	public static final int INTERVAL_POOL_MAX_VALUE = 1000;
+	public static const int INTERVAL_POOL_MAX_VALUE = 1000;
 
-	public static final Interval INVALID = new Interval(-1, -2);
+	public static const Interval INVALID = new Interval(-1, -2);
 
 	static Interval[] cache = new Interval[INTERVAL_POOL_MAX_VALUE + 1];
 
@@ -38,7 +38,7 @@ class Interval {
 		return b - a + 1;
 	}
 
-	override public bool equals(Object o) {
+	public bool equals(Object o) {
 		if (o is null || (cast(Interval) o) !is null) {
 			return false;
 		}
@@ -46,7 +46,7 @@ class Interval {
 		return this.a == other.a && this.b == other.b;
 	}
 
-	override public int hashCode() {
+	public int hashCode() {
 		int hash = 23;
 		hash = hash * 31 + a;
 		hash = hash * 31 + b;
