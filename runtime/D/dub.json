@@ -1,0 +1,8 @@
+{
+  "name": "antlr4-d-runtime",
+  "authors": [
+    "DeflatedPickle"
+  ],
+  "description": "An ANTLR4 D target.",
+  "license": "BSD 3"
+}
