@@ -2,10 +2,10 @@ dTypeInitMap ::= [
 	"bool": "false",
 
 	"byte": "0",
-	"ubyte": "0",
+	"ubyte": "0u",
 
 	"cent": "0",
-	"ucent": "0",
+	"ucent": "0u",
 
 	"char": "0",
 	"dchar": "0",
@@ -20,17 +20,17 @@ dTypeInitMap ::= [
 	"ifloat": "0.0f",
 
 	"int": "0",
-	"uint": "0",
+	"uint": "0u",
 
-	"long": "0",
-	"ulong": "0",
+	"long": "0L",
+	"ulong": "0uL",
 
 	"real": "0",
 	"creal": "0",
 	"ireal": "0",
 
 	"short": "0",
-	"ushort": "0",
+	"ushort": "0u",
 
 	default: "null"
 ]
