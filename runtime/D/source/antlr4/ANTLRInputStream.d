@@ -32,19 +32,19 @@ class ANTLRInputStream : CharStream {
 		this.n = numberOfActualCharsInArray;
 	}
 
-/*    this(Reader r) {
+    this(LockingTextReader r) {
         this(r, INITIAL_BUFFER_SIZE, READ_BUFFER_SIZE);
     }
 
-    this(Reader r, int initialSize) {
+    this(LockingTextReader r, int initialSize) {
         this(r, initialSize, READ_BUFFER_SIZE);
     }
 
-    this(Reader r, int initialSize, int readChunkSize) {
+    this(LockingTextReader r, int initialSize, int readChunkSize) {
         load(r, initialSize, readChunkSize);
     }
 
-	this(InputStream input) {
+/*	this(InputStream input) {
 		this(new InputStreamReader(input), INITIAL_BUFFER_SIZE);
 	}
 
@@ -54,9 +54,9 @@ class ANTLRInputStream : CharStream {
 
 	this(InputStream input, int initialSize, int readChunkSize) {
 		this(new InputStreamReader(input), initialSize, readChunkSize);
-	}
+	}*/
 
-	public void load(Reader r, int size, int readChunkSize) {
+	public void load(LockingTextReader r, int size, int readChunkSize) {
 		if (r is null) {
 			return;
 		}
@@ -72,7 +72,7 @@ class ANTLRInputStream : CharStream {
    			int p = 0;
    			do {
    				if (p+readChunkSize > data.length) {
-   					data = Arrays.copyOf(data, data.length * 2);
+   					data.length *= 2;
    				}
    				numRead = r.read(data, p, readChunkSize);
    				p += numRead;
@@ -82,7 +82,7 @@ class ANTLRInputStream : CharStream {
    		finally {
    			r.close();
    		}
-   	}*/
+   	}
 
 	public void reset() {
 		p = 0;
