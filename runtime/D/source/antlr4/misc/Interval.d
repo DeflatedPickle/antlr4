@@ -1,6 +1,7 @@
 module antlr4.misc.Interval;
 
 import std.stdio;
+import std.format;
 import std.algorithm;
 
 class Interval {
@@ -27,7 +28,7 @@ class Interval {
 		if (a != b || a < 0 || a > INTERVAL_POOL_MAX_VALUE) {
 			return new Interval(a, b);
 		}
-		if (cache[a] == null) {
+		if (cache[a] is null) {
 			cache[a] = new Interval(a, a);
 		}
 		return cache[a];
@@ -106,7 +107,7 @@ class Interval {
 	}
 
 	override public string toString() {
-		return a + ".." + b;
+		return format("%i..%i", a, b);
 	}
 }
 

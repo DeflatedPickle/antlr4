@@ -1,7 +1,7 @@
 module antlr4.ANTLRInputStream;
 
 import std.stdio;
-import core.stdc.string;
+import std.algorithm;
 
 import antlr4.IntStream;
 import antlr4.CharStream;
@@ -24,7 +24,7 @@ class ANTLRInputStream : CharStream {
 
 	this(string input) {
 		this.data = cast(char[]) input;
-		this.n = strlen(input);
+		this.n = input.length;
 	}
 
 	this(char[] data, int numberOfActualCharsInArray) {
@@ -32,15 +32,15 @@ class ANTLRInputStream : CharStream {
 		this.n = numberOfActualCharsInArray;
 	}
 
-    this(LockingTextReader r) {
+    this(File r) {
         this(r, INITIAL_BUFFER_SIZE, READ_BUFFER_SIZE);
     }
 
-    this(LockingTextReader r, int initialSize) {
+    this(File r, int initialSize) {
         this(r, initialSize, READ_BUFFER_SIZE);
     }
 
-    this(LockingTextReader r, int initialSize, int readChunkSize) {
+    this(File r, int initialSize, int readChunkSize) {
         load(r, initialSize, readChunkSize);
     }
 
@@ -56,10 +56,10 @@ class ANTLRInputStream : CharStream {
 		this(new InputStreamReader(input), initialSize, readChunkSize);
 	}*/
 
-	public void load(LockingTextReader r, int size, int readChunkSize) {
-		if (r is null) {
+	public void load(File r, int size, int readChunkSize) {
+/*		if (r is null) {
 			return;
-		}
+		}*/
 		if (size <= 0) {
 			size = INITIAL_BUFFER_SIZE;
 		}
@@ -74,7 +74,7 @@ class ANTLRInputStream : CharStream {
    				if (p+readChunkSize > data.length) {
    					data.length *= 2;
    				}
-   				numRead = r.read(data, p, readChunkSize);
+   				numRead = r.rawRead(data);
    				p += numRead;
    			} while (numRead != IntStream.EOF);
    			n = p + 1;
@@ -156,7 +156,7 @@ class ANTLRInputStream : CharStream {
 		if (start >= n) {
 		    return "";
 		}
-		return new string(data, start, count);
+		return new string(data);
 	}
 
 	public string getSourceName() {
